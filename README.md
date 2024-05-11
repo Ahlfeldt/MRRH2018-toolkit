@@ -59,9 +59,9 @@ Scripts are `MATLAB` programmes that execute substantive parts of the analysis a
 | `scripts` | Folder containing `MATLAB` scripts |-|
 | `SW2020_toolkit.m` | Meta file that calls other scripts to execute the analysis. | Your journey through the toolkit starts here!|
 | `ReadData.m` | Loads various data files used by Seidel, Wickerath (2020). | You do not need to execute this program if you wish to use your own continuous travel time matrices and/or population and employment measures (in this case proceed to `OwnData.m`) |
-| `matlab/prepdata_TD86.m` | Loads various data files provided in the replication directory. Many files are not read in this toolkit to save space. Output is saved as Matlab/data/prepdata_big_TD86.mat. | You do not need to execute this program unless you want to recreate the `prepdata_big_TD86.mat` file from the data provided in the replication directory. |
-| `matlab/prepdata_TD06ftpub.m` | Reads 2006 travel times without cars and saves them as ttpublic_2006_ren.mat for use in counterfactuals. | You do not need to execute this program unless you want to recreate the `ttpublic_2006_ren.mat` file from the data provided in the replication directory. |
-| **`matlab/MAPIT`** | Function that can be called to create simple maps that illustrate outcomes by block. Useful to develop an intuition for the variables that are being generated and how they relate to each other economically. Especially if you are familiar with the geography of Berlin. | -|
+| `Descriptives.m` | Explores the data set: generates various maps and descriptive statistics | You can also execute this data set after `OwnData.m` |
+| `BorderData.m` | Adds data and generates variables needed for the border counterfactuals | You must execute this script before `Counterfactuals.m`; you may use it after `ReadData.m` or `OwnData.m` |
+| `Counterfactuals` | Performs the border counterfactuals | -|
 
 
 ## Further resources:
