@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Master MATLAB programme file for the SW2020 tolkit by               %%%
+%%% Master MATLAB programme file for the MRRH2018 tolkit by             %%%
 %%% Gabriel Ahlfeldt M. Ahlfeldt and Tobias Seidel                      %%%
 %%% The toolkit covers a class of quantitative spatial models           %%%
 %%% introduced in Monte, Redding, Rossi-Hansberg (2018): Commuting,     %%%
