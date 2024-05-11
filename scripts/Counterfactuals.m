@@ -25,7 +25,7 @@
 % Create a trade border between East and West Germany
 
 % Load data
-load('data\output\DATAusingSWborder')
+load('data/output/DATAusingSWborder')
 
 % Primitives that do not change => Changes are set to ones
 aChange = ones(J, 1);
@@ -51,7 +51,7 @@ RESULT = MAPIT('shape/VG250_KRS_clean_final',log(rChange),'Relative change in po
 % Create a commuting border between East and West Germany
 
 % Load data
-load('data\output\DATAusingSWborder')
+load('data/output/DATAusingSWborder')
 
 % Primitives that do not change => Changes are set to ones
 aChange = ones(J, 1);
@@ -77,7 +77,7 @@ RESULT = MAPIT('shape/VG250_KRS_clean_final',log(rChange),'Relative change in po
 % Create a commuting and trade border between East and West Germany
 
 % Load data
-load('data\output\DATAusingSWborder')
+load('data/output/DATAusingSWborder')
 
 % Primitives that do not change => Changes are set to ones
 aChange = ones(J, 1);
@@ -153,14 +153,14 @@ print(fullpath, '-dpng', '-r300'); % Save the plot as a PNG file with 300 dpi
 % Now repeat with half the trade cost
 global psi 
 psi = 0.21;
-save('data\output\parameters')
+save('data/output/parameters')
 
 % Recompile data with new parameter value
 OwnData
 BorderData
 
 % Load data
-load('data\output\DATAusingSWborder')
+load('data/output/DATAusingSWborder')
 
 % Primitives that do not change => Changes are set to ones
 aChange = ones(J, 1);
@@ -235,7 +235,7 @@ print(fullpath, '-dpng', '-r300'); % Save the plot as a PNG file with 300 dpi
 % Set parameter value back to baseline value
 global psi 
 psi = 0.42;
-save('data\output\parameters')
+save('data/output/parameters')
 
 % Recompile data with new parameter value
 OwnData

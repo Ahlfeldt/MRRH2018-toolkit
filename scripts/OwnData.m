@@ -28,8 +28,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear;
-load('data\output\parameters');
-% Read in you matrices; 
+load('data/output/parameters');
+% Read in your matrices; 
 dataDistance = 'distance_matrix.csv';
 dataComm = 'commuting_wide.csv';           
 dist_mat = csvread(dataDistance, 1, 1);
@@ -41,7 +41,7 @@ baseline = dist_mat;                                                        % Re
 tauni = dist_mat;
 
 % Read employment: Replace with your employment at workplace and residence
-dataComm = 'commuting_wide.csv';           %These data contain within-commuting as weighted average
+dataComm = 'commuting_wide.csv';                                            %These data contain within-commuting as weighted average
 comMat = csvread(dataComm, 1, 1);
 comMat = comMat';
 L = sum(comMat, 'all');
@@ -83,6 +83,6 @@ v_n = condCom * w_n;                                                        % Re
 % Clear old object that do not belong after update of data 
 clear dataArea dataComm dataDistance dataHous diff labour_file lCommImport_n no_traffic dataHous labor_file uncondComOld
 
-save('data\output\DATAusingSW')
+save('data/output/DATAusingSW')
 
 display('<<<<<<<<<<<<<<< Data compilation completed >>>>>>>>>>>>>>>')

@@ -24,7 +24,7 @@
 %% Read in data
 % addpath src/model_code/;
 clear;
-load('data\output\parameters');
+load('data/output/parameters');
 dataComm = 'commuting_wide.csv';                                            %These data contain within-commuting as weighted average
 dataHous = 'house_prices.csv';
 dataDistance = 'distance_matrix.csv';
@@ -88,6 +88,6 @@ clear dataArea dataComm dataDistance dataHous diff labour_file lCommImport_n no_
 [A_n,tradesh,tradeshOwn,P_n ] = solveProductTradeTK(L_n, R_n, w_n, v_n, dni);               
  
 % Save data
-save('data\output\DATAusingSW')
+save('data/output/DATAusingSW')
 
 display('<<<<<<<<<<<<<<< Data compilation completed >>>>>>>>>>>>>>>')

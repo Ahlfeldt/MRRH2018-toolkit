@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear
-load('data\output\DATAusingSW')
+load('data/output/DATAusingSW')
 
 % Compute densities
 EmpDensity_n = L_n./Area_n;

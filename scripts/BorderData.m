@@ -22,7 +22,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Load baseline data
-load('data\output\DATAusingSW')
+load('data/output/DATAusingSW')
 
 % Create a dummy for counties in the East
 East = zeros(J, 1); % Initialize the vector with zeros
@@ -42,6 +42,6 @@ BorderDist_n=BorderDist_n+10;                                               % Ad
 BorderDist_n(East == 0) = -abs(BorderDist_n(East == 0));
 
 % Save data
-save('data\output\DATAusingSWborder')
+save('data/output/DATAusingSWborder')
 
 display('<<<<<<<<<<<<<<< Border data generated >>>>>>>>>>>>>>>')

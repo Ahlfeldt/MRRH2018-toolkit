@@ -31,7 +31,7 @@
 % User 4 AH
 user = 1                                                                    % Define users
 if user==1;                                                                 % Root directory of primary user
-    cd 'D:\Dropbox\_HUB_HerreraA\Course\Repository\Replication_Directories\SW2020-toolkit';             
+    cd 'D:/Dropbox/_HUB_HerreraA/Course/Repository/Replication_Directories/SW2020-toolkit';             
 elseif user==2;                                                             % Root directory of secondary user. Add more users if necessary
     cd '';
 elseif user==3;                                                             % Root directory of secondary user. Add more users if necessary
@@ -55,7 +55,7 @@ fixC = 1;
 nu = 0.05;
 psi = 0.42;
 J = 401;
-save('data\output\parameters')
+save('data/output/parameters')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ReadData                                                                   
 % Executes script that reads in baseline data from SW2020. This data set
