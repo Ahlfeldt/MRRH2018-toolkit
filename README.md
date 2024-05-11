@@ -52,7 +52,9 @@ When using the toolkit in your work, please cite Seidel and Wickerath (2020).
 
 ## Further resources:
 
- Monte, Redding, Rossi-Hansberg (2018): Commuting, Migration, and Local Employment Elasticities, \emph{American Economic Review}, 108(12), pp. 3855-90, https://doi.org/10.1257/aer.20151507
+Ahlfeldt, Redding, Sturm, Wolf (2015): The Economics of Density: Evidence from the Berlin Wall, \emph{Econometrica}, 83(6), p. 21272189. https://doi.org/10.3982/ECTA10876](https://doi.org/10.3982/ECTA10876
+
+Monte, Redding, Rossi-Hansberg (2018): Commuting, Migration, and Local Employment Elasticities, \emph{American Economic Review}, 108(12), pp. 3855-90, https://doi.org/10.1257/aer.20151507
  
- Seidel, Wickerath (2020): Rush hours and urbanization, \emph{Regional Science and Urban Economics}, 85, https://doi.org/10.1016/j.regsciurbeco.2020.103580
+Seidel, Wickerath (2020): Rush hours and urbanization, \emph{Regional Science and Urban Economics}, 85, https://doi.org/10.1016/j.regsciurbeco.2020.103580
 
