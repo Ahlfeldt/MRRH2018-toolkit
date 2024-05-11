@@ -12,5 +12,5 @@ This toolkit covers a class of quantitative spatial models established by Monte,
 
  Monte, Redding, Rossi-Hansberg (2018): Commuting, Migration, and Local Employment Elasticities, \emph{American Economic Review}, 108(12), pp. 3855-90, https://doi.org/10.1257/aer.20151507
  
- Seidel, Wieckerth (2020): \hyperlink{https://doi.org/10.1016/j.regsciurbeco.2020.103580}{\textcolor{blue}{Rush hours and urbanization}}, \emph{Regional Science and Urban Economics}, 85
+ Seidel, Wieckerth (2020): Rush hours and urbanization}, \emph{Regional Science and Urban Economics}, 85, https://doi.org/10.1016/j.regsciurbeco.2020.103580
 
