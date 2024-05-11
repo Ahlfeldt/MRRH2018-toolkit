@@ -63,6 +63,39 @@ Scripts are `MATLAB` programmes that execute substantive parts of the analysis a
 | `BorderData.m` | Adds data and generates variables needed for the border counterfactuals | You must execute this script before `Counterfactuals.m`; you may use it after `ReadData.m` or `OwnData.m` |
 | `Counterfactuals` | Performs the border counterfactuals | -|
 
+## MATLAB functions
+
+Functions are `MATLAB` programmes that return outputs for given intputs according to a programming syntax and are being called by scripts (they may also call each other)
+
+| Script | Description | Special Instructions |
+| --- | --- | --- |
+| `progs` | Folder containing `MATLAB` functions |-|
+| `MAPIT.m` | Function that can be called to create simple maps that illustrate county outcomes  | You may use it at any stage of the analysis to inspect any exogenous or endogenous variable |
+| `getBiTK.m` | Function used for the quantification of the model; generates commuting flows that are consistent with your commuting cost matrix  | Useful if you wish to work with continuous commuting cost matrices and/or do not observe commuting flows (and wages) |
+| `solveProductTradeTK.m` | Function used for the quantification of the model; inverts fundamental productivity and solves for trade shares and the tradable goods price index  | - |
+| `counterFactsTK.m` | Main solver that solves for relative changes from the initial to the counterfactual equilibrium | Calls the functions below in an iterative procedure |
+| `updateEmplTK.m` | Updates workplace employment | Nested within `counterFactsTK.m`) |
+| `updateHousePriceTK.m` | Updates housing price | Nested within `counterFactsTK.m`) |
+| `updateLamTK.m` | Updates unconditional commuting probabilities | Nested within `counterFactsTK.m`) |
+| `updatePricesTK.m` | Updates tradable goods price index | Nested within `counterFactsTK.m`) |
+| `updateResidentsTK.m` | Updates residential employment | Nested within `counterFactsTK.m`) |
+| `updateResWageTK.m` | Updates residential wage | Nested within `counterFactsTK.m`) |
+| `updateTradeshTK.m` | Updates trade shares | Nested within `counterFactsTK.m`) |
+| `updateWageTK.m` | Updates wage | Nested within `counterFactsTK.m`) |
+
+## Shapefiles
+
+| Name | Description |
+| --- | --- |
+| `shape` | Folder containing shape files |
+| `VG250_KRS_clean_final` | County shapefile (Kreise und kreisfreie Städte, 2018 definition), indexed in the same way as MATLAB data set |
+| `states` | State shapefile (Bundesländer, 2018 definition) |
+
+## Other files
+
+| File | Description |
+| --- | --- |
+| `Codebook.pdf`| This codebook summarizes the primitives and endogenous objects of the models and introduces selected numerical algorithms in pseudo-code. The focus is on algorithms that are essential for the quantification and simulation of the respective quantitative models. |
 
 ## Further resources:
 
