@@ -74,14 +74,14 @@ Functions are `MATLAB` programmes that return outputs for given intputs accordin
 | `getBiTK.m` | Function used for the quantification of the model; generates commuting flows that are consistent with your commuting cost matrix  | Useful if you wish to work with continuous commuting cost matrices and/or do not observe commuting flows (and wages) |
 | `solveProductTradeTK.m` | Function used for the quantification of the model; inverts fundamental productivity and solves for trade shares and the tradable goods price index  | - |
 | `counterFactsTK.m` | Main solver that solves for relative changes from the initial to the counterfactual equilibrium | Calls the functions below in an iterative procedure |
-| `updateEmplTK.m` | Updates workplace employment | Nested within `counterFactsTK.m`) |
-| `updateHousePriceTK.m` | Updates housing price | Nested within `counterFactsTK.m`) |
-| `updateLamTK.m` | Updates unconditional commuting probabilities | Nested within `counterFactsTK.m`) |
-| `updatePricesTK.m` | Updates tradable goods price index | Nested within `counterFactsTK.m`) |
-| `updateResidentsTK.m` | Updates residential employment | Nested within `counterFactsTK.m`) |
-| `updateResWageTK.m` | Updates residential wage | Nested within `counterFactsTK.m`) |
-| `updateTradeshTK.m` | Updates trade shares | Nested within `counterFactsTK.m`) |
-| `updateWageTK.m` | Updates wage | Nested within `counterFactsTK.m`) |
+| `updateEmplTK.m` | Updates workplace employment | Nested within `counterFactsTK.m` |
+| `updateHousePriceTK.m` | Updates housing price | Nested within `counterFactsTK.m` |
+| `updateLamTK.m` | Updates unconditional commuting probabilities | Nested within `counterFactsTK.m` |
+| `updatePricesTK.m` | Updates tradable goods price index | Nested within `counterFactsTK.m` |
+| `updateResidentsTK.m` | Updates residential employment | Nested within `counterFactsTK.m` |
+| `updateResWageTK.m` | Updates residential wage | Nested within `counterFactsTK.m` |
+| `updateTradeshTK.m` | Updates trade shares | Nested within `counterFactsTK.m` |
+| `updateWageTK.m` | Updates wage | Nested within `counterFactsTK.m` |
 
 ## Shapefiles
 
