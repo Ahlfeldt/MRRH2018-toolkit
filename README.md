@@ -1,5 +1,7 @@
-# Codebook for:
-# Commuting, Migration, and Local Employment Elasticities
-# and
-# Rush Hours and Urbanization
-Toolkit for quantitative spatial models à la Monte, Redding, Rossi-Hansberg (2018)
+# Codebook for Quantitative Spatial Models following Monte, Redding, Rossi-Hansberg (2018) and Seidel, Wickenrath (2020)
+
+**© Gabriel M. Ahlfeldt, T. Seidel**
+
+Version 0.9, 2024
+
+## General Instructions
