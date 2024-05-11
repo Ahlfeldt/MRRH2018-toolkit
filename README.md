@@ -56,6 +56,7 @@ Scripts are `MATLAB` programmes that execute substantive parts of the analysis a
 
 | Script | Description | Special Instructions |
 | --- | --- | --- |
+| `scripts | Folder containing `MATLAB` scripts |-|
 | **`matlab/META.m`** | Meta file that calls other code files to execute the analysis. Your journey through the toolkit starts here! | -|
 | `matlab/prepdata_TD.m` | Loads various data files provided in the replication directory. Many files are not read in this toolkit to save space. Output is saved as Matlab/data/prepdata_big_TD.mat. | You do not need to execute this program unless you want to recreate the `prepdata_big_TD.mat` file from the data provided in the replication directory. |
 | `matlab/prepdata_TD86.m` | Loads various data files provided in the replication directory. Many files are not read in this toolkit to save space. Output is saved as Matlab/data/prepdata_big_TD86.mat. | You do not need to execute this program unless you want to recreate the `prepdata_big_TD86.mat` file from the data provided in the replication directory. |
