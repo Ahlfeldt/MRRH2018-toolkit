@@ -123,4 +123,4 @@ global nu delta alp sigg epsi
     pq_mat = repmat(pChange.^alp .* qChange.^(1 - alp), 1, nobs);
     wage_mat = repmat(wChange', nobs, 1);
     welfChange = bChange.^(1/epsi) .* (kapChange .* pq_mat).^(-1) .* ...
-        wage_mat .* lamChange.^(-1/epsi);
+        wage_mat .* lamChange.^(-1/epsi)
