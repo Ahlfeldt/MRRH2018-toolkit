@@ -39,7 +39,6 @@ dni = (dist_mat./min(dist_mat(:))).^psi;                                    % Di
 
 % We use a simple SL distance matrix for commuting cost tau
 baseline = dist_mat;                                                        % We use SL distance to proxy for commuting distance
-tauni = dist_mat;                                                           % We use SL distance to proxy for commuting distance
                                                                             % Replace with your commuting cost matrix!
 
 % If applicable, add matrices of relative changes in trade and 
