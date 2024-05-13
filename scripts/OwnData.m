@@ -34,11 +34,16 @@ dataDistance = 'distance_matrix.csv';
 dataComm = 'commuting_wide.csv';           
 dist_mat = csvread(dataDistance, 1, 1);
 dist_mat = dist_mat./1000; %  
-dni = (dist_mat./min(dist_mat(:))).^psi;                                    %Distance elasticity taken from Head/ Mayer, cost elasticity assuming sigma 4 from Broda and Weinstein (2004)
+dni = (dist_mat./min(dist_mat(:))).^psi;                                    % Distance elasticity taken from Head/ Mayer, cost elasticity assuming sigma 4 from Broda and Weinstein (2004)
+                                                                            % Replace with your distance measure!
 
 % We use a simple SL distance matrix for commuting cost tau
-baseline = dist_mat;                                                        % Replace with distance matrix here
-tauni = dist_mat;
+baseline = dist_mat;                                                        % We use SL distance to proxy for commuting distance
+tauni = dist_mat;                                                           % We use SL distance to proxy for commuting distance
+                                                                            % Replace with your commuting cost matrix!
+
+% If applicable, add matrices of relative changes in trade and 
+% commuting cost matrices here                                                                            
 
 % Read employment: Replace with your employment at workplace and residence
 dataComm = 'commuting_wide.csv';                                            %These data contain within-commuting as weighted average
