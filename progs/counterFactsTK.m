@@ -124,3 +124,7 @@ global nu delta alp sigg epsi
     wage_mat = repmat(wChange', nobs, 1);
     welfChange = bChange.^(1/epsi) .* (kapChange .* pq_mat).^(-1) .* ...
         wage_mat .* lamChange.^(-1/epsi)
+    % Display percentage change
+    percentageChange = (welfChange(1,1) - 1) * 100;
+    % Displaying the formatted text with the embedded numeric value
+    fprintf('...Change in welfare is %.2f%%\n', percentageChange);
