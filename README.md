@@ -33,7 +33,11 @@ After recovering the unobserved exogenous location characteristics, we use vario
 
 Monte, Redding, Rossi-Hansberg (2020) and Seidel, Wickerath (2020) quantify the model using observed commuting flows. They rationalize zero commuting flows by setting commuting costs to infinity. The advantage of this approach is that it allows for arbitrary commuting costs on routes with positive commuting flows. Depending on your application, you may wish to use commuting cost matrices that are smooth functions of network distance, travel time, or other distance measures. This will be particularly desirable in counterfactuals if you wish to allow for changes in commuting flows at the extensive margin. For example, a new road or rail may lead to commuting flows on certain routes changing from zero to positive values. You may also simply not observe bilateral commuting flows. To facilitate the applicability of the toolkit in such instances, you can use Algorithm `getBiTK` to predict bilateral commuting flows that are consistent with observed workplace employment, residence population and commuting costs. The algorithm recovers a measure of workplace amenities, that ensures that workplace employment predicted by the model matches data. Please run the script `OwnData.m` in the `scripts` folder in these instances. Make sure that the code reads your commuting cost matrix (`basline`) as well as workplace employment (`L_n`) and residence population (`R_n`) measures. You also not observe wages in your application. In this case, you may interpret the inverted fundamental as transformed wages as in Ahlfeldt, Redding, Sturm, Wolf (2015) from which you can recover model-consistent wages. Please refer to the **codebook** for further detail. 
 
-When using the toolkit in your work, please cite Monte, Redding, Rossi-Hansberg (2018) and Seidel and Wickerath (2020).
+When using the toolkit in your work, please cite this toolkit as: 
+
+G. M. Ahlfeldt, Seidel, T. (2024): Toolkit for quantitative spatial models. https://github.com/Ahlfeldt/MRRH2018-toolkit. 
+
+Please also consider citing Monte, Redding, Rossi-Hansberg (2018) and Seidel and Wickerath (2020).
 
 ## Data and Data Folders
 
