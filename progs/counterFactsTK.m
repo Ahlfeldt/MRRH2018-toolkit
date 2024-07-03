@@ -31,7 +31,7 @@ function [wChange, vChange, qChange, piChange, lamChange, pChange, rChange, ...
     %   - aChange: Vector of size Nx1. Relative changes in regional productivities.
     %   - bChange: Matrix of size NxN. Relative changes in bilateral amenities.
     %   - kapChange: Matrix of size NxN. Relative changes in bilateral commuting costs.
-    %   - dChange: Matrix of size NxN. Changes in bilateral trade costs.
+    %   - dChange: Matrix of size NxN. Relative changes in bilateral trade costs.
     %   - wObs: Vector of size Nx1. Observed regional wages.
     %   - vObs: Vector of size Nx1. Observed average residential wages.
     %   - lamObs: Matrix of size NxN. Observed bilateral commuting
