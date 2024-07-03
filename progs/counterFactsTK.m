@@ -22,10 +22,15 @@ function [wChange, vChange, qChange, piChange, lamChange, pChange, rChange, ...
     % counterfactual changes in the exogenous variables {Ai, Bn, kappa_ni,
     % tradecosts} compute the change in the endogenous variables.
     %
+    % Notes:
+    %  In the below, we refer to "relative changes". These correspond to
+    %  ratios x_hat = x_prime / x as convention in exhact algebra
+    %  notations. See Codebook Section A.2 for further detail
+    %
     % Inputs:
-    %   - aChange: Vector of size Nx1. Changes in regional productivities.
-    %   - bChange: Matrix of size NxN. Changes in bilateral amenities.
-    %   - kapChange: Matrix of size NxN. Changes in bilateral commuting costs.
+    %   - aChange: Vector of size Nx1. Relative changes in regional productivities.
+    %   - bChange: Matrix of size NxN. Relative changes in bilateral amenities.
+    %   - kapChange: Matrix of size NxN. Relative changes in bilateral commuting costs.
     %   - dChange: Matrix of size NxN. Changes in bilateral trade costs.
     %   - wObs: Vector of size Nx1. Observed regional wages.
     %   - vObs: Vector of size Nx1. Observed average residential wages.
@@ -46,16 +51,16 @@ function [wChange, vChange, qChange, piChange, lamChange, pChange, rChange, ...
     %   - nu: Scalar. Productivity spillover parameter.
     %
     % Output:
-    %   - wChange: Vector of size Nx1. Changes in regional wages.
-    %   - vChange: Vector of size Nx1. Changes in average residential wages.
-    %   - qChange: Vector of size Nx1. Changes in regional house prices.
-    %   - piChange: Matrix of size NxN. Changes in bilateral trade shares.
-    %   - lamChange: Matrix of size NxN. Changes in bilateral commuting
+    %   - wChange: Vector of size Nx1. Relative changes in regional wages.
+    %   - vChange: Vector of size Nx1. Relative changes in average residential wages.
+    %   - qChange: Vector of size Nx1. Relative changes in regional house prices.
+    %   - piChange: Matrix of size NxN. Relative changes in bilateral trade shares.
+    %   - lamChange: Matrix of size NxN. Relative changes in bilateral commuting
     %                probabilities.
-    %   - pChange: Vector of size Nx1. Changes in regional price indices.
-    %   - rChange: Vector of size Nx1. Changes in residential locations.
-    %   - lChange: Vector of size Nx1. Changes in regional employment.
-    %   - ecChange: Vector of size Nx1. Changes in regional contributions to
+    %   - pChange: Vector of size Nx1. Relative changes in regional price indices.
+    %   - rChange: Vector of size Nx1. Relative changes in residential locations.
+    %   - lChange: Vector of size Nx1. Relative changes in regional employment.
+    %   - ecChange: Vector of size Nx1. Relative changes in regional contributions to
     %               pollution.
     %   - eTotChange: Scalar. Change in total pollution.
     %   - welfChange: Scalar. Change in aggregate worker welfare.
@@ -123,7 +128,7 @@ global nu delta alp sigg epsi
     pq_mat = repmat(pChange.^alp .* qChange.^(1 - alp), 1, nobs);
     wage_mat = repmat(wChange', nobs, 1);
     welfChange = bChange.^(1/epsi) .* (kapChange .* pq_mat).^(-1) .* ...
-        wage_mat .* lamChange.^(-1/epsi)
+        wage_mat .* lamChange.^(-1/epsi);
     % Display percentage change
     percentageChange = (welfChange(1,1) - 1) * 100;
     % Displaying the formatted text with the embedded numeric value
