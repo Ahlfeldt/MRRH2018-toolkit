@@ -2,7 +2,7 @@
 
 **© Gabriel M. Ahlfeldt, Tobias Seidel**
 
-Version 0.9, 2024
+Version 0.91, 2024
 
 ## General remarks
 
@@ -109,3 +109,7 @@ Monte, Redding, Rossi-Hansberg (2018): Commuting, Migration, and Local Employmen
  
 Seidel, Wickerath (2020): Rush hours and urbanization, Regional Science and Urban Economics, 85, https://doi.org/10.1016/j.regsciurbeco.2020.103580
 
+## Version history: 
+
+Version 0.90: Public release version
+Version 0.91: MAPIT programme improved by implementing Jenks Breaks for categorization
