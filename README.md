@@ -112,4 +112,5 @@ Seidel, Wickerath (2020): Rush hours and urbanization, Regional Science and Urba
 ## Version history: 
 
 Version 0.90: Public release version
+
 Version 0.91: MAPIT programme improved by implementing Jenks Breaks for categorization
