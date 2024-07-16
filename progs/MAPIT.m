@@ -33,51 +33,120 @@
             % successful cmpletion
         % A map with the desired filename will be saved in the selected
             % folder in png format
-function RESULT = MAPIT(shapefile,variable,name,folder,filename)
-clf;
-close all;
-% Define the number of colors you want in your colormap
-numColors = 256; % Typical colormap length
+function RESULT = MAPIT(shapefile, variable, name, folder, filename)
+    % This function generates a map by merging a county-level outcome with a shapefile,
+    % and saves it as a PNG file at the specified location.
+    
+    % Clear existing figures
+    clf;
+    close all;
+    
+    % Define the number of colors for the colormap
+    numColors = 256; % Typical colormap length
+    numCategories = 10; % Number of categories for Jenks natural breaks
 
-% Create a matrix of RGB values that transition from yellow to red
-% The red channel stays at 1, the green channel transitions from 1 to 0, and the blue channel stays at 0
-customColormap = [ones(numColors, 1) linspace(1, 0, numColors)' zeros(numColors, 1)];
-
-
-%GREEN = shaperead('../shapefile/BerlinGreen');                              % Reading shapefile of green spaces
-%WATER = shaperead('../shapefile/BerlinWater');                              % Reading shapefile of water spaces
-SHAPE = shaperead(shapefile);                                               % Obejct to refer to the user-specified shapefile
-STATES = shaperead(fullfile('shape', 'states')); 
-clf                                                                         % Clear any pre-existing figure 
-SHOW = variable;                                                            % Object to refer to outcome chosen by user
-for i = 1:size(SHOW,1)                                                      % We change the sign of the outcome so that larger vales correspond to red in the chosen colour scheme
-   SHAPE(i).SHOW = SHOW(i);
-end
-SHOWmin = (min(SHOW))*1;                                                   % We read the minimum value of the outcome
-SHOWmax = (max(SHOW))*1;                                                   % We read the max value of the outcome
-colorRange = makesymbolspec('Polygon', ...                                  % We define some feature of the maps to be generated, such as that it is a polygon,
-    {'SHOW',[ SHOWmin SHOWmax], 'FaceColor', colormap((customColormap))}, ...       % shows the object SHOW, uses the min and max value for the colour range, and what colour scheme to use
-    {'Default','EdgeColor',[0.75 0.75 0.75], 'LineWidth', 0.1});                                        % We do not show polygon outlines
-
-Figure2 = mapshow(SHAPE, 'Symbolspec', colorRange);                         % Now we generage our figure using the specified shapefile
-    hold on;  
-    % Overlay the states with black outlines
+    % Create a custom colormap transitioning from yellow to red, with a slightly lighter red for the highest value
+    customColormap = [ones(numCategories, 1), linspace(1, 0, numCategories)', zeros(numCategories, 1)];
+    customColormap(end, :) = [0.9, 0, 0]; % Slightly lighter red for the highest value
+    
+    % Read the shapefiles
+    SHAPE = shaperead(shapefile); % User-specified shapefile
+    STATES = shaperead(fullfile('shape', 'states')); % States shapefile
+    
+    % Calculate Jenks natural breaks
+    breaks = jenks(variable, numCategories);
+    
+    % Assign each shape to a category based on Jenks breaks
+    for i = 1:length(variable)
+        SHAPE(i).Category = find(breaks >= variable(i), 1) - 1;
+    end
+    
+    % Define the symbol specifications for the map
+    colorRange = makesymbolspec('Polygon', ...
+        {'Category', [0 numCategories-1], 'FaceColor', customColormap}, ...
+        {'Default', 'EdgeColor', [0.75, 0.75, 0.75], 'LineWidth', 0.1});
+    
+    % Generate the map
+    mapshow(SHAPE, 'Symbolspec', colorRange);
+    hold on;
     mapshow(STATES, 'DisplayType', 'polygon', 'EdgeColor', 'k', 'FaceColor', 'none', 'LineWidth', 0.25);
-    %mapshow(WATER, 'FaceColor',[0.678 0.847 0.902], 'EdgeColor', 'none');   % Add water shape
-    %mapshow(GREEN, 'FaceColor',[0.133 0.545 0.133], 'EdgeColor', 'none');   % Add green shape
-    hcb = colorbar;                                                         % Next three lines add color bar.
-    set(hcb, 'Ylim', [ SHOWmin SHOWmax]);
-    set(get(hcb, 'Title'),'String','Value');                  
-    title(name);                                                            % We use the user-specified title
-    name1 =  '';                                                           % The next lines generate a pathname and file name
-    name2 = folder;
-    name3 = '/';
-  	name4 = filename;
-    name5 = '.png';
-    filename = [name1 name2 name3 name4 name5];
-%saveas(Figure2, [pwd filename]);                                            % The map is being saved under the chosen name at the chosen destination
-print(gcf, filename, '-dpng', '-r600'); % Save as PNG at 300 DPI
-RESULT = 'Map generated and saved';                                          % Confirm successful execution
+    
+    % Add a color bar with equal-sized intervals
+    hcb = colorbar;
+    colormap(customColormap);
+    
+    % Adjust color bar ticks and labels
+    caxis([0 numCategories]);
+    ticks = 0.5:1:numCategories-0.5;
+    tickLabels = cell(1, numCategories);
+    for k = 1:numCategories
+        if k == 1
+            tickLabels{k} = sprintf('%.2f - %.2f', min(variable), breaks(k));
+        else
+            tickLabels{k} = sprintf('%.2f - %.2f', breaks(k-1), breaks(k));
+        end
+    end
+    set(hcb, 'Ticks', ticks, 'TickLabels', tickLabels);
+    set(get(hcb, 'Title'), 'String', 'Value');
+    
+    % Set the title of the map
+    title(name);
+    
+    % Construct the full filename and save the map as a PNG file
+    outputFile = fullfile(folder, [filename, '.png']);
+    print(gcf, outputFile, '-dpng', '-r600'); % Save as PNG at 600 DPI
+    
+    % Confirm successful execution
+    RESULT = 'Map generated and saved';
 end
+
+function breaks = jenks(data, numCategories)
+    % JENKS Calculate Jenks natural breaks for data classification.
+    %
+    % breaks = jenks(data, numCategories) calculates the Jenks natural
+    % breaks for the input data vector and the desired number of categories.
+    
+    data = sort(data);
+    mat1 = zeros(length(data), numCategories);
+    mat2 = inf(length(data), numCategories);
+    
+    for i = 1:length(data)
+        mat1(i, 1) = sum(data(1:i));
+        mat2(i, 1) = sum((data(1:i) - mean(data(1:i))).^2);
+    end
+    
+    for j = 2:numCategories
+        for i = j:length(data)
+            s1 = 0;
+            s2 = 0;
+            v = inf;
+            for m = i:-1:j
+                s1 = s1 + data(m);
+                s2 = s2 + data(m) * data(m);
+                if m > 1
+                    v1 = mat2(m-1, j-1);
+                else
+                    v1 = 0;
+                end
+                v2 = s2 - (s1 * s1) / (i - m + 1);
+                if (v1 + v2) < v
+                    mat1(i, j) = m;
+                    mat2(i, j) = v1 + v2;
+                    v = v1 + v2;
+                end
+            end
+        end
+    end
+    
+    k = length(data);
+    breaks = zeros(numCategories, 1);
+    breaks(end) = data(end);
+    for j = numCategories-1:-1:1
+        id = mat1(k, j+1) - 1;
+        breaks(j) = data(id);
+        k = id;
+    end
+end
+
 
 % Code ends 
