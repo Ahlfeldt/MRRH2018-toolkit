@@ -75,7 +75,7 @@ Area_n = csvread(dataArea,1,1);
 [L_n,condCom,B_i,uncondCom,comMat]= getBiTK(w_n, baseline, R_n, L_n, L);                            % Original workplace employment and commuting probability are being rewritten
 % Notice that IF WAGES ARE NOT AVAILABLE, B_i has an isomorphic
 % interpretation as transformed wage omega (see ARSW2015). It can be used
-% to recover w_n for a given epsi. To this end, simply enter a w_n vegtor
+% to recover w_n for a given epsi. To this end, simply enter a w_n vector of
 % ones, run the solver and recover wages as w_n = B_i.^(1./epsi)
 
 % Compute expected wage at residence
