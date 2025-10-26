@@ -35,7 +35,7 @@ Monte, Redding, Rossi-Hansberg (2020) and Seidel, Wickerath (2020) quantify the 
 
 When using the toolkit in your work, please cite this toolkit as: 
 
-G. M. Ahlfeldt, Seidel, T. (2024): Toolkit for quantitative spatial models. https://github.com/Ahlfeldt/MRRH2018-toolkit. 
+Ahlfeldt, Seidel (2024): Toolkit for quantitative spatial models. https://github.com/Ahlfeldt/MRRH2018-toolkit. 
 
 Please also consider citing Monte, Redding, Rossi-Hansberg (2018) and Seidel and Wickerath (2020).
 
