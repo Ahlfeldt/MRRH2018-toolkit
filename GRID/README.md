@@ -128,8 +128,7 @@ Outputs include maps and tables of relative changes in:
 
 When using this toolkit in your research, please cite:
 
-Ahlfeldt, Gabriel M., and Tobias Seidel (2025): *MRRH2018-GRID Toolkit: A grid-based implementation of the Monte, Redding, Rossi-Hansberg (2018) model.*  
-https://github.com/Ahlfeldt/MRRH2018-GRID-toolkit
+Ahlfeldt, Seidel (2024): Toolkit for quantitative spatial models. https://github.com/Ahlfeldt/MRRH2018-toolkit.
 
 ---
 
