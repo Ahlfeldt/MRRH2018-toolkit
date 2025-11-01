@@ -47,7 +47,7 @@ The GRID version relies on three key data toolkits:
 
 The workflow is as follows:
 
-1. Generate grid and centroid shapefiles using **GRID-gen.py** or **HEX-gen.py** from the GRID-toolkit. You only need to define the lat/lon coordinates of the centre of your desired grid, the width and height of your desired grid, and the intended side length of the grid cells. For further detail, consider the readme file of the [GRID-toolkit](https://github.com/Ahlfeldt?tab=repositories)
+1. Generate grid and centroid shapefiles using **GRID-gen.py** or **HEX-gen.py** from the GRID-toolkit. You only need to define the lat/lon coordinates of the centre of your desired grid, the width and height of your desired grid, and the intended side length of the grid cells. The grids will automatically be created within the 'GRID/GRID-toolkit/output' folder in the root folder of your clone of the MRRH2018-toolkit. For further detail, consider the readme file of the [GRID-toolkit](https://github.com/Ahlfeldt?tab=repositories)
 2. Populate the grids with employment and population data using **GRID-data.py**.  
 3. Optionally, compute travel time matrices using the **TTMATRIX-toolkit**.  
 4. Copy the resulting `grid-data.shp`, `centroids-data.shp`, and `distance_matrix.csv` into the `/input` folder of this toolkit.  
