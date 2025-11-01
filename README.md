@@ -69,9 +69,9 @@ Scripts are `MATLAB` programmes that execute substantive parts of the analysis a
 | `Descriptives.m` | Explores the data set: generates various maps and descriptive statistics | You can also execute this data set after `OwnData.m` |
 | `BorderData.m` | Adds data and generates variables needed for the border counterfactuals | You must execute this script before `Counterfactuals.m`; you may use it after `ReadData.m` or `OwnData.m` |
 | `Counterfactuals` | Performs the border counterfactuals | -|
-| `GRID_MRRH2018_toolkit.m` | Meta file that calls other scripts to execute the GRID version of the toolkit. |-|
-| `GRIDData.m` | Loads GRID data prepared by related toolkits and quantifies the model. | |
-| `GRIDCounterfactuals.m` | Performs the counterfactuals, an introduction of an HSR line in the present example. |-|
+| `GRID_MRRH2018_toolkit.m` | Meta file that calls other scripts to execute the GRID version of the toolkit. | For further detail, go to [GRID-MRRH2018-toolkit](https://github.com/Ahlfeldt/MRRH2018-toolkit/tree/main/GRID)|
+| `GRIDData.m` | Loads GRID data prepared by related toolkits and quantifies the model. | For further detail, go to [GRID-MRRH2018-toolkit](https://github.com/Ahlfeldt/MRRH2018-toolkit/tree/main/GRID) |
+| `GRIDCounterfactuals.m` | Performs the counterfactuals, an introduction of an HSR line in the present example. | For further detail, go to [GRID-MRRH2018-toolkit](https://github.com/Ahlfeldt/MRRH2018-toolkit/tree/main/GRID)|
 
 
 ## MATLAB functions
