@@ -6,111 +6,138 @@ Version 0.92, 2025
 
 ## General remarks
 
-This toolkit covers a class of quantitative spatial models established by Monte, Redding, Rossi-Hansberg (2018). We aim to provide an accessible and easy-to-use simulation framework within `MATLAB` (Monte, Reeding, Rossi-Hansberg use `Mathematica`) that helps developing the intuition for the key mechanisms in the model as well as the programming implementation of the model. To this end, this toolkit contains a codebook which summarizes the various exogenous and endogenous objects of the model, its equilibrium conditions, and various solvers used to take the model to the data. We build on Seidel and Wickerath (2020) who apply a variant of the Monte, Redding, Rossi-Hansberg (2018) model to Germany. The toolkit introduces a subset of codes that are crucial for the quantification and simulation of the model, with applications that serve didactic purposes and are unrelated to the substantive analyses in both papers. For more general applicability, the toolkit is designed to also work in instances where the researcher does not observe bilateral commuting flows (and possibly not even wages). 
+The GRID version of the **MRRH2018-toolkit** extends the original [MRRH2018-toolkit](https://github.com/Ahlfeldt/MRRH2018-toolkit) to enable the quantification and simulation of **Monte, Redding, and Rossi-Hansberg (2018)**–type spatial models using gridded data.  
 
-This toolkit has been developed as core component of the course [Quantitative Spatial Economics](https://sites.google.com/view/bqse/bqse-teaching) taught by Gabriel Ahlfeldt to research students at the Berlin School of Economics and Humboldt University. The course is taught in the German summer term and is open to visiting PhD students.
+While the original version is tailored to the German county-level application presented in **Seidel and Wickerath (2020)**, the GRID version is designed for **straightforward implementation in other real-world settings**. By integrating with the **[GRID-toolkit](https://github.com/Ahlfeldt/GRID-toolkit)** and the **[TTMATRIX-toolkit](https://github.com/Ahlfeldt/TTMATRIX-toolkit)**, users can automatically generate compatible spatial data inputs — including population and employment grids and travel-time matrices — without the need for manual adjustments.
 
-## General instructions
+The GRID version reproduces the logic, structure, and equilibrium algorithms of the MRRH2018 framework but replaces administrative units with spatial grids. This enables consistent model estimation and counterfactual simulations across cities, regions, or countries for which suitable gridded data exist.  
 
-Before you can start, you **need to install the following MATLAB toolboxes:**
+In particular, researchers can directly feed **[AABPL-toolkit](https://github.com/Ahlfeldt/AABPL-toolkit)**   outputs (city-level employment and population data) into the **GRID-toolkit** to generate the grid-based population and employment shapefiles that serve as inputs here. Notice that the **[GRID-toolkit](https://github.com/Ahlfeldt/GRID-toolkit)** generates **synthetic wage and rent** data from the real employment and population data **[AABPL-toolkit](https://github.com/Ahlfeldt/AABPL-toolkit)** assuming canonical elasticities and random location fundamentals. While the use of imperfect proxies for wage and rent does affect the counterfactual simulations, the impact on the simulations conducted under exact hat algebra will be limited (see the MRRH-toolkit codebook for a discussion of the exact hat algebra approach).   
 
-- Global optimization toolbox
-- Optimization toolbox
-- Mapping toolbox
-- Statistics and machine learning toolbox
+This folder contains the input data amenable to an exemplary application for the simulation of a high-speed rail in the Bay Area prepared by Gabriel Ahlfeldt for a discussion of [Greaney et al (2025)](https://www.andrii-parkhomenko.com/files/Dynamic_Urban_Economics.pdf) at the 2025 CURE conference at LSE. The discussion slides are available [here](https://github.com/Ahlfeldt/presentations/blob/main/Discussions/202511-CURE-London.pdf). 
 
-To install a MATLAB toolbox, open MATLAB and go to the 'Home' tab. Click on 'Add-Ons' in the menu. From there, browse or search for the toolbox you want to install. Click on the toolbox to view its details. Then, proceed by clicking 'Install.' Follow the on-screen instructions, which will include accepting the license agreement and selecting the installation path. After the installation is complete, the toolbox will be ready to use. Make sure you have the appropriate licenses for the toolbox you've selected.
+It is strongly recommended that users first familiarize themselves with the **baseline MRRH2018-toolkit** and complete the didactic counterfactuals for the German setting before proceeding with the GRID version.
 
-## How to Use the Toolkit
+---
 
-The toolkit is designed as a didactic journey through the codes essential for the quantification and simulation of this class of models. The aim is to convey how to quantify the model and conduct simple counterfactuals.
+## Toolkit overview
 
-Once you are set up, execute the codes in the order in which they are being called by `MRRH2018_toolkit.m` in the `scripts` folder. When you use the toolkit for the first time, it is especially important that you execute the scripts exactly in the order outlined by `MRRH2018_toolkit.m` as intermediate inputs will be generated that will be used at later stages. There are also didactic reasons for proceeding in the given order since the structure broadly follows the use of the model in the paper and codes become progressively more complex. For the best learning experience, we recommend that you open the scripts and go through the code line by line (instead of calling scripts from `MRRH2018_toolkit.m`). Plenty of comments have been added to refer to the relevant equations in the paper. It will likely be beneficial to triangulate between the code, the pseudo codes summarized in the **codebook**, and the Monte, Redding, Rossi-Hansberg (2018) and Seidel, Wickerath (2020) papers to understand how the code implements the model.
+The **MRRH2018-GRID Toolkit** allows the user to:
 
-Throughout the quantification of the model, we use the `MAPIT` program to illustrate selected variables recovered using the structure of the model. You can use `MAPIT` to conveniently plot any model input or output at any stage of the analysis to develop your intuition for the various endogenous and exogenous objects. `MAPIT` is relatively slow. If you want to experiment with the code and reduce the computational time, you may find it convenient to outcomment the use of `MAPIT`.
+- Quantify the MRRH (2018) model using **grid-level data** instead of administrative units.
+- Calibrate the model using population, employment, and distance data derived from the **GRID** and **TTMATRIX** toolkits.
+- Conduct **counterfactual simulations** for arbitrary metropolitan regions or entire countries.
+- Analyze effects of spatial shocks — e.g. new transport infrastructure, barriers, or productivity changes — using a fully flexible spatial resolution.
 
-After recovering the unobserved exogenous location characteristics, we use various solution algorithms to solve for the spatial equilibrium. For illustrative purposes, we perform a series of simple counterfactuals. Specifically, we implement a hypothetical border along the former border between East and West Germany that may either prevent commuting, trade, or both. Notice that the population remains mobile across residences. This way, the model provides insights into who the population would like to reoptimize their location choices in light of the asymmetry of the strength of the shock that arises from the two different parts home market size. You can use `MAPIT` to inspect the effects on any endogenous outcome and execute similar counterfactuals by changing other primitives of the model. The toolkit will hopefully be sufficiently transparent for you to conveniently run your own counterfactuals.
+---
 
-Monte, Redding, Rossi-Hansberg (2020) and Seidel, Wickerath (2020) quantify the model using observed commuting flows. They rationalize zero commuting flows by setting commuting costs to infinity. The advantage of this approach is that it allows for arbitrary commuting costs on routes with positive commuting flows. Depending on your application, you may wish to use commuting cost matrices that are smooth functions of network distance, travel time, or other distance measures. This will be particularly desirable in counterfactuals if you wish to allow for changes in commuting flows at the extensive margin. For example, a new road or rail may lead to commuting flows on certain routes changing from zero to positive values. You may also simply not observe bilateral commuting flows. To facilitate the applicability of the toolkit in such instances, you can use Algorithm `getBiTK` to predict bilateral commuting flows that are consistent with observed workplace employment, residence population and commuting costs. The algorithm recovers a measure of workplace amenities, that ensures that workplace employment predicted by the model matches data. Please run the script `OwnData.m` in the `scripts` folder in these instances. Make sure that the code reads your commuting cost matrix (`basline`) as well as workplace employment (`L_n`) and residence population (`R_n`) measures. You also not observe wages in your application. In this case, you may interpret the inverted fundamental as transformed wages as in Ahlfeldt, Redding, Sturm, Wolf (2015) from which you can recover model-consistent wages. Please refer to the **codebook** for further detail. 
+## Data integration and workflow
 
-When using the toolkit in your work, please cite this toolkit as: 
+The GRID version relies on three key data toolkits:
 
-Ahlfeldt, Seidel (2024): Toolkit for quantitative spatial models. https://github.com/Ahlfeldt/MRRH2018-toolkit. 
+1. **[AABPL-toolkit](https://github.com/Ahlfeldt/AABPL-toolkit)**  
+   Provides standardized global city-level data on employment and population.
 
-Please also consider citing Monte, Redding, Rossi-Hansberg (2018) and Seidel and Wickerath (2020).
+2. **[GRID-toolkit](https://github.com/Ahlfeldt/GRID-toolkit)**  
+   Generates square or hexagonal grids and populates them with data (e.g., AABPL outputs).  
+   Produces `grid-data.shp`, `centroids-data.shp`, and `distance_matrix.csv`.
 
-## Data and Data Folders
+3. **[TTMATRIX-toolkit](https://github.com/Ahlfeldt/TTMATRIX-toolkit)**  
+   Computes travel time matrices that can replace or complement distance matrices in the model calibration.
 
-| Directory | File | Description  | Additional Information |
-| --- | --- | --- | --- |
-| `matlab/data/input` | | Folder containing required data inputs to execute this toolkit | -|
-| `matlab/data/input` | `commuting_wide.csv` | CSV file containing bilateral commuting flows | -|
-| `matlab/data/input` | `CountyArea.csv` | CSV file containing county geographic area in sq. km |- |
-| `matlab/data/input` | `CountyBorderDist.csv` | CSV file containing distance from the inner-German border n km | -|
-| `matlab/data/input` | `distance_matrix.csv` |  CSV file containing bilateral distances between counties |-|
-| `matlab/data/input` | `house_prices.csv` |  CSV file containing county house prices |-|
-| `matlab/data/input` | `labor_tidy.csv` |  CSV file containing labour market outcomes |-|
-| `matlab/data/input` | `roundtrip_time_base.csv` |  CSV file containing bilateral commuting times |-|
-| `matlab/data/output` | | Folder containing data files generated by the scripts in this toolkit. | Will be populated while you execute the MATLAB programs |
-| `matlab/figs` | | Folder containing figures and maps  |Will be populated while you execute the MATLAB programs |
+The workflow is as follows:
+
+1. Generate grid and centroid shapefiles using **GRID-gen.py** or **HEX-gen.py** from the GRID-toolkit. You only need to define the lat/lon coordinates of the centre of your desired grid, the width and height of your desired grid, and the intended side length of the grid cells. For further detail, consider the readme file of the [GRID-toolkit](https://github.com/Ahlfeldt?tab=repositories)
+2. Populate the grids with employment and population data using **GRID-data.py**.  
+3. Optionally, compute travel time matrices using the **TTMATRIX-toolkit**.  
+4. Copy the resulting `grid-data.shp`, `centroids-data.shp`, and `distance_matrix.csv` into the `/input` folder of this toolkit.  
+5. Run the **MRRH2018-GRID** scripts in MATLAB to quantify the model and run counterfactuals.
+
+---
+
+## Folder structure
+
+| Directory | File | Description |
+| --- | --- | --- |
+| `matlab/data/input` | `grid-data.shp` | Polygon shapefile containing population and employment per grid cell. |
+| `matlab/data/input` | `centroids-data.shp` | Centroid shapefile matching the grid. |
+| `matlab/data/input` | `distance_matrix.csv` | Bilateral centroid distance matrix (or travel time matrix). |
+| `matlab/data/output` | | Folder where results are written during simulation. |
+| `matlab/scripts` | | MATLAB scripts implementing the grid-based model quantification and counterfactuals. |
+| `matlab/progs` | | MATLAB functions used by the scripts (adapted from the original toolkit). |
+| `matlab/figs` | | Folder for generated figures and maps. |
+
+---
 
 ## MATLAB scripts
 
-Scripts are `MATLAB` programmes that execute substantive parts of the analysis and call functions
+Scripts are executed sequentially via the meta file `MRRH2018_GRID_toolkit.m` in the `scripts` folder.
 
-| Script | Description | Special Instructions |
+| Script | Description | Special instructions |
 | --- | --- | --- |
-| `scripts` | Folder containing `MATLAB` scripts |-|
-| `MRRH2018_toolkit.m` | Meta file that calls other scripts to execute the analysis. | Your journey through the toolkit starts here!|
-| `ReadData.m` | Loads various data files used by Seidel, Wickerath (2020). | You do not need to execute this program if you wish to use your own continuous travel time matrices and/or population and employment measures (in this case proceed to `OwnData.m` |
-| `Descriptives.m` | Explores the data set: generates various maps and descriptive statistics | You can also execute this data set after `OwnData.m` |
-| `BorderData.m` | Adds data and generates variables needed for the border counterfactuals | You must execute this script before `Counterfactuals.m`; you may use it after `ReadData.m` or `OwnData.m` |
-| `Counterfactuals` | Performs the border counterfactuals | -|
+| `MRRH2018_GRID_toolkit.m` | Master file that calls other scripts in sequence. | Start here to execute the full workflow. |
+| `ReadGridData.m` | Reads grid-based input data generated by the GRID-toolkit. | Adjust file paths in the user settings section if needed. |
+| `CalibrateModel.m` | Quantifies model fundamentals using grid-level data. | - |
+| `Counterfactuals_GRID.m` | Executes counterfactual simulations (e.g., transport improvements, barriers, shocks). | Requires calibrated baseline. |
+| `MapResults_GRID.m` | Uses `MAPIT` to visualize results on the grid. | Optional for visualization. |
+
+---
 
 ## MATLAB functions
 
-Functions are `MATLAB` programmes that return outputs for given intputs according to a programming syntax and are being called by scripts (they may also call each other)
+Functions are MATLAB programs that perform iterative updates within the equilibrium solver.  
+They closely mirror those of the original toolkit but have been adapted to grid geometry and data structure.
 
-| Script | Description | Special Instructions |
-| --- | --- | --- |
-| `progs` | Folder containing `MATLAB` functions |-|
-| `MAPIT.m` | Function that can be called to create simple maps that illustrate county outcomes  | You may use it at any stage of the analysis to inspect any exogenous or endogenous variable |
-| `getBiTK.m` | Function used for the quantification of the model; generates commuting flows that are consistent with your commuting cost matrix  | Useful if you wish to work with continuous commuting cost matrices and/or do not observe commuting flows (and wages) |
-| `solveProductTradeTK.m` | Function used for the quantification of the model; inverts fundamental productivity and solves for trade shares and the tradable goods price index  | - |
-| `counterFactsTK.m` | Main solver that solves for relative changes from the initial to the counterfactual equilibrium | Calls the functions below in an iterative procedure |
-| `updateEmplTK.m` | Updates workplace employment | Nested within `counterFactsTK.m` |
-| `updateHousePriceTK.m` | Updates housing price | Nested within `counterFactsTK.m` |
-| `updateLamTK.m` | Updates unconditional commuting probabilities | Nested within `counterFactsTK.m` |
-| `updatePricesTK.m` | Updates tradable goods price index | Nested within `counterFactsTK.m` |
-| `updateResidentsTK.m` | Updates residential employment | Nested within `counterFactsTK.m` |
-| `updateResWageTK.m` | Updates residential wage | Nested within `counterFactsTK.m` |
-| `updateTradeshTK.m` | Updates trade shares | Nested within `counterFactsTK.m` |
-| `updateWageTK.m` | Updates wage | Nested within `counterFactsTK.m` |
-
-## Shapefiles
-
-| Name | Description |
+| Function | Description |
 | --- | --- |
-| `shape` | Folder containing shape files |
-| `VG250_KRS_clean_final` | County shapefile (Kreise und kreisfreie Städte, 2018 definition), indexed in the same way as MATLAB data set |
-| `states` | State shapefile (Bundesländer, 2018 definition) |
+| `getBiTK.m` | Predicts bilateral commuting flows consistent with grid-level data. |
+| `counterFactsTK.m` | Main solver computing relative equilibrium changes. |
+| `updateEmplTK.m` | Updates workplace employment during iteration. |
+| `updateResidentsTK.m` | Updates residential population. |
+| `updateWageTK.m` | Updates wages. |
+| `updateHousePriceTK.m` | Updates housing prices. |
+| `updatePricesTK.m` | Updates tradable goods price index. |
+| `updateLamTK.m` | Updates commuting probabilities. |
 
-## Other files
+---
 
-| File | Description |
-| --- | --- |
-| `Codebook.pdf`| This codebook summarizes the primitives and endogenous objects of the models and introduces selected numerical algorithms in pseudo-code. The focus is on algorithms that are essential for the quantification and simulation of the respective quantitative models. |
+## Example applications
 
-## Further resources:
+After calibration, you can simulate counterfactuals such as:
+- Closing or opening barriers (e.g. a river, national border)
+- Adding or removing transport connections (via distance or travel time changes)
+- Productivity or amenity shocks affecting subsets of grid cells
 
-Ahlfeldt, Redding, Sturm, Wolf (2015): The Economics of Density: Evidence from the Berlin Wall, Econometrica, 83(6), p. 21272189. https://doi.org/10.3982/ECTA10876
+Outputs include maps and tables of relative changes in:
+- Population, employment, wages, rents, and commuting probabilities
 
-Monte, Redding, Rossi-Hansberg (2018): Commuting, Migration, and Local Employment Elasticities, American Economic Review, 108(12), pp. 3855-90, https://doi.org/10.1257/aer.20151507
- 
-Seidel, Wickerath (2020): Rush hours and urbanization, Regional Science and Urban Economics, 85, https://doi.org/10.1016/j.regsciurbeco.2020.103580
+---
 
-## Version history: 
+## Recommended sequence
 
-Version 0.90: Public release version
+1. Review and run the **baseline MRRH2018-toolkit** to understand the core logic.  
+2. Familiarize yourself with the **GRID-toolkit** and **TTMATRIX-toolkit** to generate required input data.  
+3. Proceed to **MRRH2018-GRID** for custom applications.
 
-Version 0.91: MAPIT programme improved by implementing Jenks Breaks for categorization
+---
+
+## Citation
+
+When using this toolkit in your research, please cite:
+
+Ahlfeldt, Gabriel M., and Tobias Seidel (2025): *MRRH2018-GRID Toolkit: A grid-based implementation of the Monte, Redding, Rossi-Hansberg (2018) model.*  
+https://github.com/Ahlfeldt/MRRH2018-GRID-toolkit
+
+---
+
+## References
+
+- Ahlfeldt, Redding, Sturm, Wolf (2015): *The Economics of Density: Evidence from the Berlin Wall*, *Econometrica*, 83(6): 2127–2189.  
+- Monte, Redding, Rossi-Hansberg (2018): *Commuting, Migration, and Local Employment Elasticities*, *American Economic Review*, 108(12): 3855–3890.  
+- Seidel, Wickerath (2020): *Rush Hours and Urbanization*, *Regional Science and Urban Economics*, 85.  
+
+---
+
+## Version history
+
+Version 1.0 — Initial GRID release, 2025.
