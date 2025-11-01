@@ -82,6 +82,7 @@ Functions are `MATLAB` programmes that return outputs for given intputs accordin
 | --- | --- | --- |
 | `progs` | Folder containing `MATLAB` functions |-|
 | `MAPIT.m` | Function that can be called to create simple maps that illustrate county outcomes  | You may use it at any stage of the analysis to inspect any exogenous or endogenous variable |
+| `GRIDMAPIT.m` | Same as `MAPIT.m`, but for the GRID version of the toolkit | Can process any grid created by the related toolkits |
 | `getBiTK.m` | Function used for the quantification of the model; generates commuting flows that are consistent with your commuting cost matrix  | Useful if you wish to work with continuous commuting cost matrices and/or do not observe commuting flows (and wages) |
 | `solveProductTradeTK.m` | Function used for the quantification of the model; inverts fundamental productivity and solves for trade shares and the tradable goods price index  | - |
 | `counterFactsTK.m` | Main solver that solves for relative changes from the initial to the counterfactual equilibrium | Calls the functions below in an iterative procedure |
