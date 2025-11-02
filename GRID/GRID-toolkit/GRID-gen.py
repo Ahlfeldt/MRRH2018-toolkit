@@ -1,11 +1,27 @@
+# ================================================================
+# MRRH2018 GRID GENERATOR SCRIPT
+# Part of the MRRH2018 Toolkit
+#
+# Authors: Gabriel Ahlfeldt & Tobias Seidel
+# Purpose: Generate a square grid that covers the spatial extent
+#          of shapefiles provided in the 'input' folder. The grid
+#          is centered and scaled automatically based on input data.
+#
+# Dependencies: geopandas, shapely, pyproj, pandas, fiona
+# ================================================================
+
+
+# INTRO =======================
+ 
+# This is a modified version of the file included in the GRID-tookit by Garbiel Ahlfeldt 
+# Here, the grid size will automatically adjusted to the cover the shapefiles in the input folder
+# All the user needs to do is to specify the grid size
+
 # =============================
 # USER SETTINGS BLOCK
 # =============================
-NUM_ROWS = 50
-NUM_COLS = 50
 CELL_SIZE_KM = 2
-CENTROID_LAT = 37.558724 # Use 51.5 for London
-CENTROID_LON = -122.155537 # USe 0 for London
+INPUT_FOLDER = "input"
 OUTPUT_FOLDER = "output"
 
 # =============================
@@ -17,7 +33,7 @@ import sys
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-for pkg in ["geopandas", "shapely", "pyproj"]:
+for pkg in ["geopandas", "shapely", "pyproj", "fiona", "pandas"]:
     try:
         __import__(pkg)
     except ImportError:
@@ -25,12 +41,72 @@ for pkg in ["geopandas", "shapely", "pyproj"]:
 
 import geopandas as gpd
 from shapely.geometry import Polygon, Point
+import pandas as pd
 import os
 from pyproj import CRS, Transformer
 
 # =============================
+# NEW PRE‑PROCESSING TOOLS
+# =============================
+# 1. Read all shapefiles from input folder
+shapefile_paths = [
+    os.path.join(INPUT_FOLDER, f)
+    for f in os.listdir(INPUT_FOLDER)
+    if f.lower().endswith(".shp")
+]
+
+if not shapefile_paths:
+    raise RuntimeError(f"No shapefiles found in {INPUT_FOLDER}")
+
+# 2. Load them and merge into a single GeoDataFrame
+gdfs = [gpd.read_file(path) for path in shapefile_paths]
+combined_gdf = gpd.GeoDataFrame(pd.concat(gdfs, ignore_index=True))
+combined_gdf = combined_gdf.set_geometry("geometry")
+
+# Ensure CRS exists
+if combined_gdf.crs is None:
+    raise RuntimeError("Input shapefiles have no CRS defined.")
+
+# 3. Reproject into WGS84 to get geographic bounds
+combined_gdf = combined_gdf.to_crs("EPSG:4326")
+xmin, ymin, xmax, ymax = combined_gdf.total_bounds
+
+# Compute approximate centre in lat/lon
+CENTROID_LON = (xmin + xmax) / 2
+CENTROID_LAT = (ymin + ymax) / 2
+
+# 4. Define UTM CRS for area
+def get_utm_crs(lat, lon):
+    zone_number = int((lon + 180) / 6) + 1
+    hemisphere = 'north' if lat >= 0 else 'south'
+    return CRS.from_proj4(
+        f"+proj=utm +zone={zone_number} +{'north' if hemisphere == 'north' else 'south'} +datum=WGS84 +units=m +no_defs"
+    )
+
+utm_crs_input = get_utm_crs(CENTROID_LAT, CENTROID_LON)
+
+# 5. Reproject combined shape to UTM to get bounds in meters
+combined_proj = combined_gdf.to_crs(utm_crs_input)
+xmin_m, ymin_m, xmax_m, ymax_m = combined_proj.total_bounds
+
+# 6. Compute grid dimensions automatically
+cell_size_m = CELL_SIZE_KM * 1000.0
+grid_width_m = xmax_m - xmin_m
+grid_height_m = ymax_m - ymin_m
+
+NUM_COLS = int(grid_width_m // cell_size_m) + 1
+NUM_ROWS = int(grid_height_m // cell_size_m) + 1
+
+print(f"Auto-computed grid parameters:")
+print(f"  Centre lat/lon = ({CENTROID_LAT:.6f}, {CENTROID_LON:.6f})")
+print(f"  NUM_ROWS = {NUM_ROWS}, NUM_COLS = {NUM_COLS}")
+print(f"  CELL_SIZE_KM = {CELL_SIZE_KM}")
+print(f"  Total coverage: {grid_width_m/1000:.2f} km × {grid_height_m/1000:.2f} km")
+
+# =============================
 # MAIN SCRIPT
 # =============================
+
 
 def get_utm_crs(lat, lon):
     zone_number = int((lon + 180) / 6) + 1

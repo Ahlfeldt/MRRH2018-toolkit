@@ -1,3 +1,16 @@
+# ================================================================
+# MRRH2018 FULL PIPELINE CONTROLLER SCRIPT
+# Part of the MRRH2018 Toolkit
+#
+# Authors: Gabriel Ahlfeldt & Tobias Seidel
+# Purpose: Executes all major components of the MRRH2018 Toolkit
+#          in the correct order, including grid creation,
+#          data processing, and travel time matrix generation.
+#
+# Dependencies: Python standard library (subprocess, sys, os)
+# ================================================================
+
+
 import subprocess
 import sys
 import os

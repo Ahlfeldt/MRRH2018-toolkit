@@ -1,3 +1,16 @@
+# ================================================================
+# MRRH2018 GRID DATA PROCESSOR SCRIPT
+# Part of the MRRH2018 Toolkit
+#
+# Authors: Gabriel Ahlfeldt & Tobias Seidel
+# Purpose: Aggregates spatial data to a regular grid, calculates
+#          synthetic population, employment, wage and rent variables,
+#          and creates a bilateral distance matrix for analysis.
+#
+# Dependencies: geopandas, pandas, shapely, scipy, numpy
+# ================================================================
+
+
 # =============================
 # USER SETTINGS BLOCK
 # =============================
