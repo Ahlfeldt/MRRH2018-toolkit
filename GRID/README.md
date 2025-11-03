@@ -29,6 +29,7 @@ The **MRRH2018-GRID Toolkit** allows the user to:
 - Conduct **counterfactual simulations** for arbitrary metropolitan regions or entire countries.
 - Analyze effects of spatial shocks — e.g. new transport infrastructure, barriers, or productivity changes — using a fully flexible spatial resolution.
 
+In a nutshell, all you need to do is to download and copy shapefiles from the **[AABPL-toolkit](https://github.com/Ahlfeldt/AABPL-toolkit)** to the **'GRID/GRID-toolkit/input'** folder. Without any further adjustments, you can use the Python scripts provided in this toolkit to generate a grid for the analyses with all the information needed for the quantification of the MRRH model. In MATALB, all you need to do is to specify the folder where you have cloned the MRRH-toolkit. The quantification of the model can then be executed without any further adjustments to the scrip.
 ---
 
 ## Data integration and workflow
