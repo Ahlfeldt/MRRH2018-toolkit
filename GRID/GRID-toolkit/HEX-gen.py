@@ -38,7 +38,7 @@ from pyproj import CRS, Transformer
 # =============================
 INPUT_FOLDER = "input"
 OUTPUT_FOLDER = "output"
-HEX_WIDTH_KM = 5  # Width of each hexagon (flat‑topped)
+HEX_WIDTH_KM = 2  # Width of each hexagon (flat‑topped)
 
 # Read all shapefiles from input folder
 shapefile_paths = [
