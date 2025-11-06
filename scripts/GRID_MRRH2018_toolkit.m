@@ -23,22 +23,20 @@
 %%%% Mapping
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Root folder of working directory %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Automatically set working directory to the parent of this script
 
-% User 1 GA X-Kölln desktop
-% User 2 GA notebook
-% User 3 GA Server
-% User 4 AH
-user = 1                                                                    % Define users
-if user==1;                                                                 % Root directory of primary user
-    cd 'H:/Research/MRRH2018-toolkit';             
-elseif user==2;                                                             % Root directory of secondary user. Add more users if necessary
-    cd '';
-elseif user==3;                                                             % Root directory of secondary user. Add more users if necessary
-    cd '';
-elseif user==4;
-    cd '';
-end;
+% Get full path of this script
+thisFile = matlab.desktop.editor.getActiveFilename;
+
+if ~isempty(thisFile)
+    [thisDir,~,~] = fileparts(thisFile);   % directory containing the script
+    parentDir = fileparts(thisDir);        % parent folder
+    cd(parentDir);                         % move up one level
+    fprintf('Working directory set to: %s\n', parentDir);
+else
+    warning('Could not determine script location. Please run from a saved .m file.');
+end
+
 addpath('data/input')                                                       % Adding path to data
 addpath('progs')                                                            % Adding path to programmes
 addpath('scripts')                                                          % Adding path to scripts that execture various steps of the analysis
