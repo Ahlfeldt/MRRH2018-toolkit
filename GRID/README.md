@@ -103,7 +103,7 @@ Outputs include maps and tables of relative changes in:
 
 1. Review and run the **baseline MRRH2018-toolkit** to understand the core logic.  
 2. Familiarize yourself with the **GRID-toolkit** and **TTMATRIX-toolkit** to generate required input data.  
-3. Proceed to **MRRH2018-GRID** for custom applications.
+3. Proceed to **GRID-MRRH2018** for custom applications.
 
 ---
 
