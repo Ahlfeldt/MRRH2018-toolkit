@@ -1,4 +1,4 @@
-# GRID version of Toolkit for Quantitative Spatial Models
+# Toolkit for Quantitative Spatial Models: GRID version
 
 **© Gabriel M. Ahlfeldt, Tobias Seidel**
 
