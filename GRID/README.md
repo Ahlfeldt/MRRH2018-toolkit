@@ -111,7 +111,11 @@ Outputs include maps and tables of relative changes in:
 
 When using this toolkit in your research, please cite:
 
-Ahlfeldt, Seidel (2024): Toolkit for quantitative spatial models. https://github.com/Ahlfeldt/MRRH2018-toolkit.
+Ahlfeldt, Seidel (2024): Toolkit for quantitative spatial models. https://github.com/Ahlfeldt/MRRH2018-toolkit
+
+and specifically for the GRID version:
+
+Ahlfeldt, Seidel (2025): Toolkit for quantitative spatial models: GRID version. https://github.com/Ahlfeldt/MRRH2018-toolkit/edit/main/GRID
 
 ---
 
