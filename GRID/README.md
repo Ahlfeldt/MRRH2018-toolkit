@@ -1,4 +1,4 @@
-# Toolkit for Quantitative Spatial Models: GRID version
+# Toolkit for Quantitative Spatial Models: GRID version (MMRRH2018-toolkit: GRID version)
 
 **© Gabriel M. Ahlfeldt, Tobias Seidel**
 
